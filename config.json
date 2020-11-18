@@ -138,7 +138,7 @@
     "termination_reward" : 1,
     "discount_factor" : 0.99,
     "target_sync_frequency" : 100,
-    "number_of_episodes": 1000,
+    "number_of_episodes": 100,
     "max_steps_per_episode" : 20
   },
   "double_dueling_prioritized_random_start" : {
@@ -311,5 +311,24 @@
     "number_of_episodes": 1000,
     "max_steps_per_episode" : 10,
     "random_start_position": true
+  },
+  "lunar_lander_test" : {
+    "environment_name" : "LunarLander-v2",
+    "environment_wrapper" : false,
+    "algorithm_module" : "services.algorithms.dqn.double_dqn",
+    "model_module" : "services.models.sequential.dueling_dqn",
+    "replay_buffer_module": "services.algorithms.dqn.replay_buffer.prioritized",
+    "learning_rate" : 0.05,
+    "batch_size" : 128,
+    "fully_connected_model_size" : [100, 100],
+    "max_replay_buffer_length" : 200000,
+    "epsilon_end" : 0.0001,
+    "epsilon_anneal_percent" : 0.90,
+    "termination_reward" : 5,
+    "discount_factor" : 1.0,
+    "target_sync_frequency" : 100,
+    "number_of_episodes": 100,
+    "max_steps_per_episode" : 10000,
+    "pass_environment_config" : false
   }
 }

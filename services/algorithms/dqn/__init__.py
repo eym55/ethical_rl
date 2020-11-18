@@ -91,13 +91,16 @@ class DQNBASE(AlgorithmBASE):
         self.env.render()
       total_episode_rewards += reward
       # quit on actually reaching goal or passing the step limit
-      if done or self.env.step_count >= self.env.max_steps:
+      if done:
         break
+      if hasattr(self.env, 'step_count') and hasattr(self.env, 'max_steps'):
+        if self.env.step_count >= self.env.max_steps:
+          break
 
     # no need to train until the buffer has data
     loss = self._training_step(episode) if episode >= self.buffer_wait_steps else 0
 
-    print(f"{self.env.env.agent_start_pos} / {self.env.env.agent_start_dir} episode: {episode} / total_rewards: {total_episode_rewards} / total_steps: {step} / epsilon: {epsilon}")
+    print(f"episode: {episode} / total_rewards: {total_episode_rewards} / total_steps: {step} / epsilon: {epsilon}")
 
     # TODO: result module that captures arbitrary data
     return total_episode_rewards, loss
@@ -109,12 +112,16 @@ class DQNBASE(AlgorithmBASE):
       reward, loss = self._train_single_episode(episode)
       history[REWARDS].append(reward)
       history[LOSS].append(loss)
-      history[CONSTRAINT_VIOLATION_COUNT].append(self.env.metadata[CONSTRAINT_VIOLATION_COUNT])
-      history[EPISODE_ACTION_HISTORY].append(self.env.metadata[EPISODE_ACTION_HISTORY])
+      for key in self.env.metadata:
+        history[key].append(self.env.metadata[key])
+      # if hasattr(self.env, f'metadata[{CONSTRAINT_VIOLATION_COUNT}]'):
+      #   history[CONSTRAINT_VIOLATION_COUNT].append(self.env.metadata[CONSTRAINT_VIOLATION_COUNT])
+      # if hasattr(self.env, f'metadata[{EPISODE_ACTION_HISTORY}]'):
+      #   history[EPISODE_ACTION_HISTORY].append(self.env.metadata[EPISODE_ACTION_HISTORY])
 
       # TODO: this is bad, can do better (wrapper is weird too)
       if self.number_of_episodes - episode <= 200: 
-        print(self.env.metadata[EPISODE_ACTION_HISTORY])
+        #print(self.env.metadata[EPISODE_ACTION_HISTORY])
         self.env.env.agent_start_pos = (1,1)
 
     return history
