@@ -98,9 +98,9 @@ class DQNBASE(AlgorithmBASE):
           break
 
     # no need to train until the buffer has data
-    loss = self._training_step(episode) if episode >= self.buffer_wait_steps else 0
-    if episode % 100 == 0:
-      print(f"episode: {episode} / total_rewards: {total_episode_rewards} / total_steps: {step} / epsilon: {epsilon} / loss:{loss}")
+      loss = self._training_step(episode) if episode >= self.buffer_wait_steps else 0
+      if episode % 100 == 0:
+        print(f"episode: {episode} / total_rewards: {total_episode_rewards} / total_steps: {step} / epsilon: {epsilon} / loss:{loss}")
 
     # TODO: result module that captures arbitrary data
     return total_episode_rewards, loss
@@ -120,9 +120,9 @@ class DQNBASE(AlgorithmBASE):
       #   history[EPISODE_ACTION_HISTORY].append(self.env.metadata[EPISODE_ACTION_HISTORY])
 
       # TODO: this is bad, can do better (wrapper is weird too)
-      if self.number_of_episodes - episode <= 200: 
-        #print(self.env.metadata[EPISODE_ACTION_HISTORY])
-        self.env.env.agent_start_pos = (1,1)
+      # if self.number_of_episodes - episode <= 200:
+      #   #print(self.env.metadata[EPISODE_ACTION_HISTORY])
+      #   self.env.env.agent_start_pos = (1,1)
 
     return history
 
