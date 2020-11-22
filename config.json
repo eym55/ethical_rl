@@ -323,11 +323,12 @@
     "fully_connected_model_size" : [100, 100],
     "max_replay_buffer_length" : 200000,
     "epsilon_end" : 0.001,
-    "epsilon_anneal_percent" : 0.996,
-    "discount_factor" : 0.99,
+    "epsilon_anneal_percent" : 0.9,
+    "discount_factor" : 0.95,
     "target_sync_frequency" : 100,
-    "number_of_episodes": 1000,
+    "number_of_episodes": 1500,
     "max_steps_per_episode" : 1000,
-    "pass_environment_config" : false
+    "pass_environment_config" : false,
+    "clip_norm" : 5.0
   }
 }
