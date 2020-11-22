@@ -100,7 +100,7 @@ class DQNBASE(AlgorithmBASE):
     # no need to train until the buffer has data
     loss = self._training_step(episode) if episode >= self.buffer_wait_steps else 0
     if episode % 100 == 0:
-      print(f"episode: {episode} / total_rewards: {total_episode_rewards} / total_steps: {step} / epsilon: {epsilon}")
+      print(f"episode: {episode} / total_rewards: {total_episode_rewards} / total_steps: {step} / epsilon: {epsilon} / loss:{loss}")
 
     # TODO: result module that captures arbitrary data
     return total_episode_rewards, loss
