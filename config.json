@@ -328,6 +328,6 @@
     "target_sync_frequency" : 1000,
     "number_of_episodes": 1000,
     "max_steps_per_episode" : 1000,
-    "pass_environment_config" : false,
+    "pass_environment_config" : false
   }
 }
