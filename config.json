@@ -326,8 +326,9 @@
     "epsilon_anneal_percent" : 0.9,
     "discount_factor" : 0.99,
     "target_sync_frequency" : 100,
-    "number_of_episodes": 1200,
+    "number_of_episodes": 2000,
     "max_steps_per_episode" : 300,
-    "pass_environment_config" : false
+    "pass_environment_config" : false,
+    "clip_norm": 5
   }
 }
